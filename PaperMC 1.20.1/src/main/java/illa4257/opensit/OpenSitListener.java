@@ -1,6 +1,7 @@
 package illa4257.opensit;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
@@ -20,17 +21,18 @@ public class OpenSitListener implements Listener {
             return;
         final Entity e = event.getDismounted();
         if (e instanceof BlockDisplay && e.getScoreboardTags().contains("sit")) {
-            event.getEntity().teleport(event.getEntity().getLocation().add(0, 1, 0));
+            event.getEntity().teleportAsync(event.getEntity().getLocation().add(0, 1, 0));
             e.remove();
         } else if (e instanceof BlockDisplay && e.getScoreboardTags().contains("sit2")) {
-            event.getEntity().teleport(event.getEntity().getLocation().add(0, 1.5, 0));
+            event.getEntity().teleportAsync(event.getEntity().getLocation().add(0, 1.5, 0));
             e.remove();
         }
     }
 
     @EventHandler
     public void onInteract(final PlayerInteractEvent event) {
-        if (event.getItem() != null || event.getClickedBlock() == null || event.getAction().isLeftClick() || !event.getPlayer().hasPermission("OpenSit.SitClick"))
+        Player player = event.getPlayer();
+        if (event.getItem() != null || !player.getInventory().getItemInMainHand().getType().equals(Material.AIR) || event.getClickedBlock() == null || event.getAction().isLeftClick() || !event.getPlayer().hasPermission("OpenSit.SitClick"))
             return;
         final BlockData d = event.getClickedBlock().getState().getBlockData();
         if (d instanceof Slab || d instanceof Stairs) {

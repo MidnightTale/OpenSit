@@ -4,7 +4,7 @@ main: illa4257.opensit.OpenSit
 api-version: '1.20'
 author: illa4257
 website: https://github.com/illa4257/OpenSit
-
+folia-supported: true
 commands:
   sit:
     description: Sit

@@ -24,17 +24,14 @@ public class SitCommand implements CommandExecutor {
             return true;
         }
         if (plr.isInsideVehicle()) {
-            sender.sendMessage("You're sitting now.");
             return true;
         }
         if (plr.isSneaking()) {
-            sender.sendMessage("You're sneaking now.");
             return true;
         }
         final Location l = plr.getLocation();
         final RayTraceResult r = l.getWorld().rayTraceBlocks(l, new Vector(0, -1, 0), 0.001);
         if (r == null) {
-            sender.sendMessage("You do not stand on the ground.");
             return true;
         }
         final BlockDisplay b = (BlockDisplay) l.getWorld().spawnEntity(new Location(l.getWorld(), l.getX(), r.getHitPosition().getY() - .2, l.getZ()), EntityType.BLOCK_DISPLAY);
