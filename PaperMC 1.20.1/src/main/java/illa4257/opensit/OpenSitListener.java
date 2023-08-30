@@ -22,12 +22,12 @@ public class OpenSitListener implements Listener {
             return;
         final Entity e = event.getDismounted();
         if (e instanceof BlockDisplay && e.getScoreboardTags().contains("sit")) {
-            Util.runAsyncSchedulerNow(OpenSit.instance, player -> {
+            Util.runTaskForEntity(event.getEntity(), OpenSit.instance, () -> {
             event.getEntity().teleportAsync(event.getEntity().getLocation().add(0, 1, 0));
             e.remove();
             });
         } else if (e instanceof BlockDisplay && e.getScoreboardTags().contains("sit2")) {
-            Util.runAsyncSchedulerNow(OpenSit.instance, player -> {
+            Util.runTaskForEntity(event.getEntity(), OpenSit.instance, () -> {
             event.getEntity().teleportAsync(event.getEntity().getLocation().add(0, 1.5, 0));
             e.remove();
             });

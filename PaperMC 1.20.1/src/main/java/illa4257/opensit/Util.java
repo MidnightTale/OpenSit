@@ -58,11 +58,11 @@ public class Util {
             });
         }
     }
-    public static void runTaskForEntity(Entity entity, Plugin plugin, Runnable entityTask, long initialDelayTicks) {
+    public static void runTaskForEntity(Entity entity, Plugin plugin, Runnable entityTask) {
         if (isFolia()) {
-            entity.getScheduler().runDelayed(plugin, task -> entityTask.run(), null, initialDelayTicks);
+            entity.getScheduler().run(plugin, task -> entityTask.run(), null);
         } else {
-            Bukkit.getScheduler().runTaskLater(plugin, entityTask, initialDelayTicks);
+            Bukkit.getScheduler().runTask(plugin, entityTask);
         }
     }
     public static void runGlobal(Plugin plugin, Runnable task, long initialDelayTicks) {
